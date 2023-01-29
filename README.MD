@@ -16,6 +16,7 @@
 
 
 ```python
+$pip install pdwinauto
 # How to get the DataFrames
 
 from invo import (mkey, get_window_frame, get_automation_frame, get_automation_frame_from_pid,
