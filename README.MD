@@ -19,7 +19,7 @@
 $pip install pdwinauto
 # How to get the DataFrames
 
-from invo import (mkey, get_window_frame, get_automation_frame, get_automation_frame_from_pid,
+from pdwinauto import (mkey, get_window_frame, get_automation_frame, get_automation_frame_from_pid,
                   get_automation_frame_from_filenames, get_automation_frame_from_all_pids, )
 mkey.enable_failsafekill("ctrl+e") #Always use a failsafe 
 
