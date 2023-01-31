@@ -1,7 +1,8 @@
 import os
 import re
+import sys
 import time
-from collections import namedtuple
+from collections import namedtuple, deque
 
 import comtypes
 import comtypes.client
@@ -61,6 +62,11 @@ from ctypes import byref
 from ctypes import POINTER
 from ctypes import c_ubyte
 from ctypes import c_size_t
+
+
+pdwinautovars = sys.modules[__name__]
+pdwinautovars.dftemps = deque([], 15)
+
 
 windll = LibraryLoader(WinDLL)
 
@@ -1378,7 +1384,9 @@ def get_automation_frame(dfr, uia=True, screenshot_folder=None):
         df = _get_screenshot(df)
         df = _save_screenshot(df, screenshot_folder)
     df.aa_menu_items = df.aa_menu_items.ds_apply_ignore(pd.NA, lambda x: x[0])
-    return df.filter(sorted(df.columns)).copy()
+    ba = df.filter(sorted(df.columns)).copy()
+    pdwinautovars.dftemps.append(ba.copy())
+    return ba
 
 
 GetMenuItemCount = windll.user32.GetMenuItemCount
